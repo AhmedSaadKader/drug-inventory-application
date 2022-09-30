@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width', initial-scale= 1)
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src="/javascripts/script.js" defer) 
+  body
+    nav(class="navbar")
+      div(class="brand-title") Brand 
+      a(href="#", class="toggle-button")
+        span(class="bar")
+        span(class="bar")
+        span(class="bar")
+      div(class="navbar-links")
+        ul 
+          li
+            a(href="#") Home
+          li
+            a(href="#") About
+          li
+            a(href="#") Contact
+    block content
