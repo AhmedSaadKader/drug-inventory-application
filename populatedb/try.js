@@ -9,10 +9,18 @@ async function main() {
   const db = mongoose.connection;
 
   const conn = await db.collection("activeingredients").distinct("name");
-  console.log(conn);
+  console.log(conn.length);
 
-  //   const drugs = await Drug.find();
-  //   console.log(drugs);
+  const duplicates = ActiveIngredient.aggregate([
+    { $group: { _id: "$name", count: { $sum: 1 } } },
+    { $match: { _id: { $ne: null }, count: { $gt: 1 } } },
+    { $sort: { count: -1 } },
+    { $project: { name: "$_id", _id: 0 } },
+  ]).exec((err, results) => {
+    console.log(results);
+  });
+
+  duplicates;
 
   const actives = await ActiveIngredient.find();
 
