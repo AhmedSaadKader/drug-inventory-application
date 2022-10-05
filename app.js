@@ -4,8 +4,11 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const mongoose = require("mongoose");
+const compression = require("compression");
+const helmet = require("helmet");
 
-const mongodb = "mongodb+srv://ahmedsaad:719vI8jKhyO2fn4O@cluster0.ignr5qa.mongodb.net/?retryWrites=true&w=majority";
+const dev_db_url = "mongodb+srv://ahmedsaad:719vI8jKhyO2fn4O@cluster0.ignr5qa.mongodb.net/?retryWrites=true&w=majority";
+const mongodb = process.env.MONGODB_URI || dev_db_url;
 
 mongoose.connect(mongodb, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
@@ -20,6 +23,9 @@ var app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
+
+app.use(compression());
+app.use(helmet());
 
 app.use(logger("dev"));
 app.use(express.json());

@@ -1,5 +1,28 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div(class="mainBody")
+    h1= title
+    p Welcome to #{title}, a complete database for all egyptian drugs
+    
+    h1 Dynamic content
+    if error 
+      p Error getting dynamic content
+    else 
+      p The database has the following counts: 
+
+      ul 
+        li 
+          a(href="/catalog/drugs") #[strong Drug: ] !{data.drug_count}
+        li 
+          a(href="/catalog/categories") #[strong Category: ] !{data.category_count}
+        li 
+          a(href="/catalog/companies") #[strong Company: ] !{data.company_count}
+        //- li
+        //-   a(href="/catalog/suppliers") #[strong Supplier: ] !{data.supplier_count}
+        li
+          a(href="/catalog/actives") #[strong Active Ingredients: ] !{data.activeIngredient_count}
+        //- li
+        //-   a(href="/catalog/drugInstances") #[strong Drug Instances: ] !{data.DrugInstance_count}
+
+

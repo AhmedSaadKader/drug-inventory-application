@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+    .body
+        h1=title 
+
+        h4 
+            a(href="/catalog/active/create") Create New Active Ingredient 
+        
+        ul 
+            each active in actives_list
+                li 
+                    a(href=active.url) #{active.name}
+            else 
+                li There are no Active Ingredients

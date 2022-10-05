@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+    h1=title
+
+    if drugs.length 
+        p #[strong Delete or change the company of the following drugs before deleting the company.]
+        div 
+            dl 
+                each drug in drugs
+                    dt 
+                        a(href=drug.url) #{drug.name}
+    else 
+        p #[strong Are you sure you want to delete this company?]
+
+        form(action="" method="POST") 
+            .form-group 
+                input(type='hidden' value=company._id name='companyId')
+            button(type='submit') Submit

@@ -6,19 +6,52 @@ html
     meta(name='viewport', content='width=device-width', initial-scale= 1)
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src="/javascripts/script.js" defer) 
+    if path == "/"
+      link(rel="stylesheet", href="/stylesheets/index.css")
+    if path == "/drugs" || path == "/companies"
+      link(rel="stylesheet", href="/stylesheets/list.css")
+    if path 
+      if path.includes("create") | path.includes('update')
+        link(rel="stylesheet", href="/stylesheets/form.css")
+
   body
     nav(class="navbar")
-      div(class="brand-title") Brand 
+      div(class="brand-title")
+        a(href="/") Brand 
       a(href="#", class="toggle-button")
         span(class="bar")
         span(class="bar")
         span(class="bar")
       div(class="navbar-links")
         ul 
-          li
-            a(href="#") Home
-          li
-            a(href="#") About
-          li
-            a(href="#") Contact
+          div(class='drugs-li mainlink')
+            a(href="/catalog/drugs") Drugs
+            div(class="drugs-sub")
+              div(class="branch-link")
+                a(href=("/catalog/drug/create")) New Drug
+          div(class="companies-li mainlink")
+            a(href="/catalog/companies") Companies
+            div(class="companies-sub")
+              div(class="branch-link")
+                a(href=("/catalog/company/create")) New Company
+          div(class="categories-li mainlink")
+            a(href="/catalog/categories") Categories
+            div(class="categories-sub")
+              div(class="branch-link")
+                a(href="/catalog/category/create") New Category
+          //- div(class="suppliers-li mainlink")
+          //-   a(href="/catalog/suppliers") Suppliers
+          //-   div(class="suppliers-sub")
+          //-     div(class="branch-link")
+          //-       a(href="/catalog/supplier/create") New Supplier
+          div(class="actives-li mainlink")
+            a(href="/catalog/actives") Active Ing
+            div(class="actives-sub")
+              div(class="branch-link")
+                a(href="/catalog/active/create") New Active
+          //- div(class="drugInstance-li mainlink")
+          //-   a(href="/catalog/drugInstances") Drug Instances
+          //-   div(class="drugInstance-sub")
+          //-     div(class="branch-link")
+          //-       a(href="/catalog/drugInstance/create") New Instance
     block content

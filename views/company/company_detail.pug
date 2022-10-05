@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+    h1=title
+
+    ul 
+        each drug in drugs
+            li 
+                a(href=drug.url) #{drug.name}
+        else 
+            li There are no drugs for this company
+
+    hr
+    p 
+        a(href=company.url + '/delete') Delete company
+    p 
+        a(href=company.url + '/update') Update company

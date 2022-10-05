@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+    .body
+        h1=title 
+
+        ul 
+            each activeIngredient in activeIngredients 
+                li 
+                    a(href=activeIngredient.url) #{activeIngredient.name}
+            else 
+                li There are no active ingredients in this category
+        
+        hr
+        p
+            a(href=category.url + '/delete') Delete this category 
+        p 
+            a(href=category.url + '/update') Update this category

@@ -1,0 +1,23 @@
+extends ../layout
+
+block content 
+    .body 
+        
+        h1=title 
+        h2=drug.nameArabic
+
+        if drugInstances.length
+            p #[strong Delete the following drug instances if you want to delete this drug]
+
+            div
+                dl
+                each drugInstance in drugInstances
+                    dt
+                        a(href=drugInstance.url) #{drugInstance.expiryDate}
+        else 
+            p Do you really want to delete this drug?
+
+            form(method="POST" action="")
+                .form-group 
+                    input(type='hidden' name='drugId' required='true' value=drug._id)
+                button(type='submit') Submit

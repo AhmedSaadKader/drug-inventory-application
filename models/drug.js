@@ -5,10 +5,8 @@ const Schema = mongoose.Schema;
 const DrugSchema = new Schema({
   name: { type: String, required: true },
   nameArabic: { type: String },
-  activeIngredient: { type: String },
-  // activeIngredient: { type: Schema.type.ObjectId, ref: "ActiveIngredient" },
-  // pharmaceuticalForm: { type: Schema.type.ObjectId, ref: "PharmaceuticalForm" },
-  // company: { type: Schema.type.ObjectId, ref: "Company" },
+  activeIngredient: { type: Schema.Types.ObjectId, ref: "ActiveIngredient" },
+  company: { type: Schema.Types.ObjectId, ref: "Company" },
   price: { type: Number, required: true },
   barcode: { type: String },
   // mainUnit: { type: Schema.type.ObjectId, ref: "Unit" },

@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+    .body
+        h1=title
+
+        if drugs.length 
+            p #[strong Delete the following drugs or change their active ingredient to delete the active ingredient.]
+
+            div
+                dl
+                each drug in drugs 
+                    dt
+                        a(href=drug.url) #{drug.name}
+        
+        else 
+            p Do you really want to delete this active ingredient?
+
+            form(method="POST" action="")
+                .form-group 
+                    input(type='hidden', name='activeId' required="true" value=activeIngredient._id)
+                button(type='submit') Submit

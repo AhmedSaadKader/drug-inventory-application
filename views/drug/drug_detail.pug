@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+    .body
+        h1 #{title}
+        h2 #{drug.nameArabic}
+        h3 Active Ingredient: #[a(href=drug.activeIngredient.url) #{drug.activeIngredient.name}]
+        h3 Category: #[a(href=drug.activeIngredient.category.url) #{drug.activeIngredient.category.name}]
+        h3 Company: #[a(href=drug.company.url) #{drug.company.name}]
+        h3 Price: #{drug.price}
+        if drug.barcode 
+            h3 Barcode: #{drug.barcode}
+        ul #[strong Drug Instances:] 
+            br
+            br
+            each drugInstance in drugInstances
+                li 
+                    a(href=drugInstance.url) #{drugInstance.expiryDate}
+            else 
+                li There are no drug instances 
+        
+        hr
+        p 
+            a(href=drug.url + '/delete') Delete this drug
+        p 
+            a(href=drug.url + '/update') Update this drug

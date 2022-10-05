@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+    .body
+        h1=title
+
+        if activeIngredients.length > 1
+            p #[strong Delete the following active ingredients or change their categories before deleting this category.]
+            ul
+                each active in activeIngredients 
+                    li 
+                        a(href=active.url) #{active.name}
+        else 
+            p #[strong Are you sure you want to delete this category?] 
+
+            form(method="POST" action="") 
+                .form-group
+                    input(type='hidden' name='categoryId' value=category._id required='true')
+                button(type='submit') Submit

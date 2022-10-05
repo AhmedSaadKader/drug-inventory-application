@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+    .body
+        h1= title
+
+        form(method='POST' action='') 
+            div.form-group
+                input(type='text', placeholder='Name of Drug', name='name' required='true', value=(undefined===drug ? '': drug.name))
+            .form-group 
+                input(type='text' placeholder="الاسم بالعربي" lang='de' name='nameArabic' value=(undefined===drug ?'': drug.nameArabic))
+            .form-group 
+                input(type='number' placeholder="Price" step='0.25' name='price' value=(undefined===drug ? '': drug.price))
+                input(type='number' placeholder="Barcode" step='0.25' name='barcode' value=(undefined===drug ? '': drug.barcode))
+            .form-group 
+                label(for="activeIngredient") Active Ingredient
+                select(#activeIngredient)(type="select", placeholder="Select Active Ingredient", name='activeIngredient')
+                    - activeIngredients.sort(function(a, b) {let activeA = a.name.toUpperCase();let activeB = b.name.toUpperCase(); return (activeA < activeB) ? -1 : (activeA > activeB) ? 1 : 0})
+                    for active in activeIngredients 
+                        if drug 
+                            option(value=active._id selected=(drug.activeIngredient._id.toString() == active._id.toString()) ? 'selected': false) #{active.name}
+                        else
+                            option(value=active._id) #{active.name}
+            .form-group 
+                label(for="company") Company
+                select#company(type="select" placeholder="Select Company" name="company")
+                    - companies.sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1)
+                    for company in companies 
+                        if drug 
+                            option(value=company._id selected=(drug.company._id.toString() == company._id.toString() ? 'selected' : false)) #{company.name}
+                        else 
+                            option(value=company._id) #{company.name}
+            button(type="submit") Submit
+
+        if errors 
+            ul 
+                for error in errors 
+                    li!= error.msg

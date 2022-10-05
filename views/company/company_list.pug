@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+    .body
+        h1=title 
+
+        h4
+            a(href="/catalog/company/create") Create new Company
+
+        ul 
+            each company in company_list 
+                li 
+                    a(href=company.url) #{company.name}
+            else 
+                li There are no companies

@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+    .body
+        h1=title
+
+        h4
+            a(href="/catalog/drug/create") Create New Drug
+        ul 
+            each drug in list_drug 
+                li #[a(href=drug.url) #{drug.name}] - Active Ingredient: #[a(href=drug.activeIngredient.url) #{drug.activeIngredient.name}] - Category: #[a(href=drug.activeIngredient.category.url) #{drug.activeIngredient.category.name}]
+            else 
+                li There are no drugs

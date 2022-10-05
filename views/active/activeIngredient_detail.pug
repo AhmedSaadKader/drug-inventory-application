@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+    .body
+        h1=title 
+
+        h3 Category: #{activeIngredient.category.name}
+        ul 
+            each drug in drugs 
+                li
+                    a(href=drug.url) #{drug.name}
+            else
+                li  There are no drugs associated with this active ingredient
+
+        hr
+        p 
+            a(href=activeIngredient.url + '/delete') Delete Active Ingredient 
+        p 
+            a(href=activeIngredient.url + '/update') Update Active Ingredient
