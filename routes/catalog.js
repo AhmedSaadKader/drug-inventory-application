@@ -1,5 +1,17 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.filename + "-" + Date.now());
+  },
+});
+
+const upload = multer({ storage });
 
 const drug_controller = require("../controllers/drugController");
 const active_controller = require("../controllers/activeController");
@@ -10,8 +22,13 @@ const supplier_controller = require("../controllers/supplierController");
 
 router.get("/", drug_controller.index);
 
+// router.post("*", upload.single("image"), (req, res, next) => {
+//   console.log(req.file);
+//   next();
+// });
+
 router.get("/drug/create", drug_controller.drug_create_get);
-router.post("/drug/create", drug_controller.drug_create_post);
+router.post("/drug/create", upload.single("image"), drug_controller.drug_create_post);
 router.get("/drug/:id/delete", drug_controller.drug_delete_get);
 router.post("/drug/:id/delete", drug_controller.drug_delete_post);
 router.get("/drug/:id/update", drug_controller.drug_update_get);

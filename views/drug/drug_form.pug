@@ -4,7 +4,7 @@ block content
     .body
         h1= title
 
-        form(method='POST' action='') 
+        form(method='POST' action='' enctype='multipart/form-data') 
             div.form-group
                 input(type='text', placeholder='Name of Drug', name='name' required='true', value=(undefined===drug ? '': drug.name))
             .form-group 
@@ -30,6 +30,9 @@ block content
                             option(value=company._id selected=(drug.company._id.toString() == company._id.toString() ? 'selected' : false)) #{company.name}
                         else 
                             option(value=company._id) #{company.name}
+            .form-group 
+                label(for="image") Image 
+                input#image(type='file' name='image')
             button(type="submit") Submit
 
         if errors 

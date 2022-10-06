@@ -6,6 +6,8 @@ const Company = require("../models/company");
 const ActiveIngredient = require("../models/activeIngredient");
 const Supplier = require("../models/supplier");
 const { body, validationResult } = require("express-validator");
+const fs = require("fs");
+const path = require("path");
 
 exports.index = (req, res) => {
   async.parallel(
@@ -128,6 +130,10 @@ exports.drug_create_post = [
       company: req.body.company,
       price: req.body.price,
       barcode: req.body.barcode,
+      image: {
+        data: fs.readFileSync(path.join(__dirname, "..", "uploads", req.file.filename)),
+        contentType: "image/png",
+      },
     });
     if (!errors.isEmpty()) {
       async.parallel(

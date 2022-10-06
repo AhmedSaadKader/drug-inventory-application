@@ -11,6 +11,10 @@ const DrugSchema = new Schema({
   barcode: { type: String },
   // mainUnit: { type: Schema.type.ObjectId, ref: "Unit" },
   // minorUnit: { type: Schema.type.ObjectId, ref: "Unit" },
+  image: {
+    data: Buffer,
+    contentType: String,
+  },
 });
 
 DrugSchema.virtual("url").get(function () {

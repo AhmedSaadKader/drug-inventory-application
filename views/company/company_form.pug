@@ -4,9 +4,11 @@ block content
     .body
         h1=title
 
-        form(method="POST" action="")
+        form(method="POST" action="" enctype='multipart/form-data')
             div.form-group
                 input#name(type='text' placeholder="Company Name..." name="name" required="true" value=(undefined === company ? '': company.name))
+            div.form-group
+                input#name(type='file' name="photos")
             button(type="submit") Submit
         
         if errors 
