@@ -4,7 +4,8 @@ block content
     .body
         h1 #{title}
         h2 #{drug.nameArabic}
-        img(src=`data:image/${drug.image.contentType};base64,${drug.image.data.toString('base64')}` style="width: 200px")
+        if drug.image.data
+            img(src=`data:image/${drug.image.contentType};base64,${drug.image.data.toString('base64')}` style="width: 200px" alt="no image")
         h3 Active Ingredient: #[a(href=drug.activeIngredient.url) #{drug.activeIngredient.name}]
         h3 Category: #[a(href=drug.activeIngredient.category.url) #{drug.activeIngredient.category.name}]
         h3 Company: #[a(href=drug.company.url) #{drug.company.name}]

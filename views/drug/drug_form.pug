@@ -18,7 +18,9 @@ block content
                     - activeIngredients.sort(function(a, b) {let activeA = a.name.toUpperCase();let activeB = b.name.toUpperCase(); return (activeA < activeB) ? -1 : (activeA > activeB) ? 1 : 0})
                     for active in activeIngredients 
                         if drug 
-                            option(value=active._id selected=(drug.activeIngredient._id.toString() == active._id.toString()) ? 'selected': false) #{active.name}
+                            option(value=active._id
+                             selected=(active._id.toString() == drug.activeIngredient._id
+                             || active._id.toString() == drug.activeIngredient) ? 'selected': false) #{active.name}
                         else
                             option(value=active._id) #{active.name}
             .form-group 

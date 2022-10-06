@@ -130,10 +130,12 @@ exports.drug_create_post = [
       company: req.body.company,
       price: req.body.price,
       barcode: req.body.barcode,
-      image: {
-        data: fs.readFileSync(path.join(__dirname, "..", "uploads", req.file.filename)),
-        contentType: "image/png",
-      },
+      image: req.file
+        ? {
+            data: fs.readFileSync(path.join(__dirname, "..", "uploads", req.file.filename)),
+            contentType: "image/png",
+          }
+        : null,
     });
     if (!errors.isEmpty()) {
       async.parallel(
@@ -149,12 +151,11 @@ exports.drug_create_post = [
           if (err) {
             return next(err);
           }
-
           res.render("drug/drug_form", {
             title: "Create Drug",
             drug,
-            companies: results.companies,
             activeIngredients: results.activeIngredients,
+            companies: results.companies,
             path: req.path,
             errors,
           });
@@ -285,6 +286,12 @@ exports.drug_update_post = [
       barcode: req.body.barcode,
       activeIngredient: req.body.activeIngredient,
       company: req.body.company,
+      image: req.file
+        ? {
+            data: fs.readFileSync(path.join(__dirname, "..", "uploads", req.file.filename)),
+            contentType: "image/png",
+          }
+        : null,
       _id: req.params.id,
     });
     if (!errors.isEmpty()) {
